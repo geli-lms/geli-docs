@@ -493,22 +493,10 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"name\":\"legalnotice\",\n    \"updatedAt\": \"2018-03-20T21:04:41.696Z\",\n    \"value\":\"This will show the legalnotice.\",\n    \"__v\": 0,\n    \"createdAt\": \"2018-03-20T21:04:41.696Z\"\n}",
+          "content": "{\n    \"name\": \"legalnotice\",\n    \"value\": \"This will show the legalnotice.\",\n    \"updatedAt\": \"2017-11-08T22:00:11.693Z\",\n    \"createdAt\": \"2017-11-08T22:00:11.693Z\",\n    \"__v\": 0\n}",
           "type": "json"
         }
       ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InternalServerError",
-            "description": ""
-          }
-        ]
-      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/ConfigController.ts",
@@ -548,7 +536,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"name\":\"legalnotice\",\n    \"updatedAt\": \"2018-03-20T21:04:41.696Z\",\n    \"value\":\"This will show the legalnotice.\",\n    \"__v\": 0,\n    \"createdAt\": \"2018-03-20T21:04:41.696Z\"\n}",
+          "content": "{\n    \"name\": \"legalnotice\",\n    \"value\": \"This will show the legalnotice.\",\n    \"updatedAt\": \"2017-11-08T22:00:11.693Z\",\n    \"createdAt\": \"2017-11-08T22:00:11.693Z\",\n    \"__v\": 0\n}",
           "type": "json"
         }
       ]
@@ -556,12 +544,6 @@ define({ "api": [
     "error": {
       "fields": {
         "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InternalServerError",
-            "description": ""
-          },
           {
             "group": "Error 4xx",
             "optional": false,
@@ -601,7 +583,7 @@ define({ "api": [
             "type": "Object",
             "optional": false,
             "field": "data",
-            "description": "<p>New data.</p>"
+            "description": "<p>New data (with single 'data' string property).</p>"
           }
         ]
       }
@@ -611,32 +593,20 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Config",
+            "type": "Object",
             "optional": false,
-            "field": "config",
-            "description": "<p>Updated config.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"$__\": {\n        \"strictMode\": true,\n        \"selected\": {},\n        \"getters\": {},\n        \"_id\": {...},\n        \"wasPopulated\": false,\n        \"activePaths\": {...},\n        \"pathsToScopes\": {},\n        \"emitter\": {...},\n        \"$options\": true\n    },\n    \"isNew\": false,\n    \"_doc\": {\n        \"createdAt\": \"2018-03-20T21:04:41.696Z\",\n        \"__v\": 0,\n        \"value\": \"This will show the legalnotice.\",\n        \"updatedAt\": \"2018-03-20T21:04:41.696Z\",\n        \"name\": \"legalnotice\",\n        \"_id\": {...}\n    },\n    \"$init\": true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>something went wrong</p>"
-          }
-        ]
-      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/ConfigController.ts",
