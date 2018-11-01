@@ -137,6 +137,25 @@
     "groupTitle": "Auth"
   },
   {
+    "type": "delete",
+    "url": "/api/auth/logout",
+    "title": "Logout user by clearing the httpOnly token cookie.",
+    "name": "AuthLogout",
+    "group": "Auth",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/AuthController.ts",
+    "groupTitle": "Auth"
+  },
+  {
     "type": "post",
     "url": "/api/auth/activate",
     "title": "Activate user",
@@ -194,7 +213,7 @@
   {
     "type": "post",
     "url": "/api/auth/login",
-    "title": "Login user",
+    "title": "Login user by responding with a httpOnly JWT cookie and the user's IUserModel data.",
     "name": "PostAuthLogin",
     "group": "Auth",
     "parameter": {
@@ -215,13 +234,6 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Generated access token.</p>"
-          },
-          {
-            "group": "Success 200",
             "type": "IUserModel",
             "optional": false,
             "field": "user",
@@ -232,7 +244,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"token\": \"JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTAzN2U2YTYwZjcyMjM2ZDhlN2M4MTMiLCJpYXQiOjE1\n    MTcyNTI0NDYsImV4cCI6MTUxNzI2MjUyNn0.b53laxHG-b6FbB7JP1GJsIgGWc3EUm0cTuufm1CKCCM\",\n    \"user\": {\n        \"_id\": \"5a037e6a60f72236d8e7c813\",\n        \"updatedAt\": \"2018-01-08T19:24:26.522Z\",\n        \"createdAt\": \"2017-11-08T22:00:10.897Z\",\n        \"email\": \"admin@test.local\",\n        \"__v\": 0,\n        \"isActive\": true,\n        \"lastVisitedCourses\": [],\n        \"role\": \"admin\",\n        \"profile\": {\n            \"firstName\": \"Dago\",\n            \"lastName\": \"Adminman\",\n            \"picture\": {}\n        },\n        \"id\": \"5a037e6a60f72236d8e7c813\"\n    }\n}",
+          "content": "{\n    \"user\": {\n        \"_id\": \"5a037e6a60f72236d8e7c813\",\n        \"updatedAt\": \"2018-01-08T19:24:26.522Z\",\n        \"createdAt\": \"2017-11-08T22:00:10.897Z\",\n        \"email\": \"admin@test.local\",\n        \"__v\": 0,\n        \"isActive\": true,\n        \"lastVisitedCourses\": [],\n        \"role\": \"admin\",\n        \"profile\": {\n            \"firstName\": \"Dago\",\n            \"lastName\": \"Adminman\",\n            \"picture\": {}\n        },\n        \"id\": \"5a037e6a60f72236d8e7c813\"\n    }\n}",
           "type": "json"
         }
       ]
@@ -1420,8 +1432,8 @@
   },
   {
     "type": "post",
-    "url": "/api/download/pdf/individual",
-    "title": "Post download request individual PDF",
+    "url": "/api/download/pdf/single",
+    "title": "Post download request single PDF",
     "name": "PostDownload",
     "group": "Download",
     "parameter": {
@@ -1482,8 +1494,8 @@
   },
   {
     "type": "post",
-    "url": "/api/download/pdf/single",
-    "title": "Post download request single PDF",
+    "url": "/api/download/pdf/individual",
+    "title": "Post download request individual PDF",
     "name": "PostDownload",
     "group": "Download",
     "parameter": {
@@ -2418,6 +2430,38 @@
   },
   {
     "type": "get",
+    "url": "/api/count",
+    "title": "get number of messages in a given room",
+    "name": "getMessage",
+    "group": "Message",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "room:",
+            "description": "<p>the room to which the messages belong.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"count\": \"45\"\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/MessageController.ts",
+    "groupTitle": "Message"
+  },
+  {
+    "type": "get",
     "url": "/api/message",
     "title": "get all messages in a given room",
     "name": "getMessage",
@@ -2472,38 +2516,6 @@
         {
           "title": "Success-Response:",
           "content": "[\n {\n   author: \"5b2d66c84daf0700d5afe7bf\",\n   chatName: \"student2\",\n   comments: [],\n   content: \"any message\",\n   createdAt: \"2018-06-22T21:14:50.924Z\",\n   room : \"5b2d66c84daf0700d5afe7d8\",\n   updatedAt: \"2018-06-22T21:14:50.924Z\",\n   __v: 0,\n   _id: \"5b2d66ca4daf0700d5aff89c\"\n }\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/MessageController.ts",
-    "groupTitle": "Message"
-  },
-  {
-    "type": "get",
-    "url": "/api/count",
-    "title": "get number of messages in a given room",
-    "name": "getMessage",
-    "group": "Message",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "room:",
-            "description": "<p>the room to which the messages belong.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n   \"count\": \"45\"\n\n}",
           "type": "json"
         }
       ]
