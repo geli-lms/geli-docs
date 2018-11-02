@@ -2166,6 +2166,14 @@ define({ "api": [
     "title": "Delete lecture",
     "name": "DeleteLecture",
     "group": "Lecture",
+    "permission": [
+      {
+        "name": "teacher"
+      },
+      {
+        "name": "admin"
+      }
+    ],
     "parameter": {
       "fields": {
         "Parameter": [
@@ -2194,7 +2202,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"result\": true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
