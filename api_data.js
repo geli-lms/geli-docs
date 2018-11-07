@@ -905,13 +905,6 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
-          },
-          {
-            "group": "Parameter",
             "type": "IUser",
             "optional": false,
             "field": "currentUser",
@@ -1056,13 +1049,6 @@ define({ "api": [
             "optional": false,
             "field": "id",
             "description": "<p>Course ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Object",
-            "optional": false,
-            "field": "data",
-            "description": "<p>Body.</p>"
           },
           {
             "group": "Parameter",
@@ -1584,13 +1570,6 @@ define({ "api": [
             "optional": false,
             "field": "data",
             "description": "<p>Course data (with courseAdmin).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -1661,13 +1640,6 @@ define({ "api": [
             "optional": false,
             "field": "data",
             "description": "<p>Lecture data (with courseId).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -1738,13 +1710,6 @@ define({ "api": [
             "optional": false,
             "field": "data",
             "description": "<p>Unit data (with courseId and lectureId).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -2277,13 +2242,6 @@ define({ "api": [
             "optional": false,
             "field": "data",
             "description": "<p>New lecture data.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -2752,13 +2710,6 @@ define({ "api": [
             "optional": false,
             "field": "data",
             "description": "<p>Notification text and information on changed course, lecture and unit.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -4517,18 +4468,6 @@ define({ "api": [
     "parameter": {
       "fields": {
         "Parameter": [
-          {
-            "group": "Parameter",
-            "optional": false,
-            "field": "data",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "optional": false,
-            "field": "currentUser",
-            "description": ""
-          },
           {
             "group": "Parameter",
             "optional": false,
