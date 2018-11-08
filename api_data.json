@@ -137,6 +137,25 @@
     "groupTitle": "Auth"
   },
   {
+    "type": "delete",
+    "url": "/api/auth/logout",
+    "title": "Logout user by clearing the httpOnly token cookie.",
+    "name": "AuthLogout",
+    "group": "Auth",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/AuthController.ts",
+    "groupTitle": "Auth"
+  },
+  {
     "type": "post",
     "url": "/api/auth/activate",
     "title": "Activate user",
@@ -194,7 +213,7 @@
   {
     "type": "post",
     "url": "/api/auth/login",
-    "title": "Login user",
+    "title": "Login user by responding with a httpOnly JWT cookie and the user's IUserModel data.",
     "name": "PostAuthLogin",
     "group": "Auth",
     "parameter": {
@@ -215,13 +234,6 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Generated access token.</p>"
-          },
-          {
-            "group": "Success 200",
             "type": "IUserModel",
             "optional": false,
             "field": "user",
@@ -232,7 +244,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"token\": \"JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTAzN2U2YTYwZjcyMjM2ZDhlN2M4MTMiLCJpYXQiOjE1\n    MTcyNTI0NDYsImV4cCI6MTUxNzI2MjUyNn0.b53laxHG-b6FbB7JP1GJsIgGWc3EUm0cTuufm1CKCCM\",\n    \"user\": {\n        \"_id\": \"5a037e6a60f72236d8e7c813\",\n        \"updatedAt\": \"2018-01-08T19:24:26.522Z\",\n        \"createdAt\": \"2017-11-08T22:00:10.897Z\",\n        \"email\": \"admin@test.local\",\n        \"__v\": 0,\n        \"isActive\": true,\n        \"lastVisitedCourses\": [],\n        \"role\": \"admin\",\n        \"profile\": {\n            \"firstName\": \"Dago\",\n            \"lastName\": \"Adminman\",\n            \"picture\": {}\n        },\n        \"id\": \"5a037e6a60f72236d8e7c813\"\n    }\n}",
+          "content": "{\n    \"user\": {\n        \"_id\": \"5a037e6a60f72236d8e7c813\",\n        \"updatedAt\": \"2018-01-08T19:24:26.522Z\",\n        \"createdAt\": \"2017-11-08T22:00:10.897Z\",\n        \"email\": \"admin@test.local\",\n        \"__v\": 0,\n        \"isActive\": true,\n        \"lastVisitedCourses\": [],\n        \"role\": \"admin\",\n        \"profile\": {\n            \"firstName\": \"Dago\",\n            \"lastName\": \"Adminman\",\n            \"picture\": {}\n        },\n        \"id\": \"5a037e6a60f72236d8e7c813\"\n    }\n}",
           "type": "json"
         }
       ]
@@ -493,22 +505,10 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"name\":\"legalnotice\",\n    \"updatedAt\": \"2018-03-20T21:04:41.696Z\",\n    \"value\":\"This will show the legalnotice.\",\n    \"__v\": 0,\n    \"createdAt\": \"2018-03-20T21:04:41.696Z\"\n}",
+          "content": "{\n    \"name\": \"legalnotice\",\n    \"value\": \"This will show the legalnotice.\",\n    \"updatedAt\": \"2017-11-08T22:00:11.693Z\",\n    \"createdAt\": \"2017-11-08T22:00:11.693Z\",\n    \"__v\": 0\n}",
           "type": "json"
         }
       ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InternalServerError",
-            "description": ""
-          }
-        ]
-      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/ConfigController.ts",
@@ -548,7 +548,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"name\":\"legalnotice\",\n    \"updatedAt\": \"2018-03-20T21:04:41.696Z\",\n    \"value\":\"This will show the legalnotice.\",\n    \"__v\": 0,\n    \"createdAt\": \"2018-03-20T21:04:41.696Z\"\n}",
+          "content": "{\n    \"name\": \"legalnotice\",\n    \"value\": \"This will show the legalnotice.\",\n    \"updatedAt\": \"2017-11-08T22:00:11.693Z\",\n    \"createdAt\": \"2017-11-08T22:00:11.693Z\",\n    \"__v\": 0\n}",
           "type": "json"
         }
       ]
@@ -556,12 +556,6 @@
     "error": {
       "fields": {
         "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InternalServerError",
-            "description": ""
-          },
           {
             "group": "Error 4xx",
             "optional": false,
@@ -601,7 +595,7 @@
             "type": "Object",
             "optional": false,
             "field": "data",
-            "description": "<p>New data.</p>"
+            "description": "<p>New data (with single 'data' string property).</p>"
           }
         ]
       }
@@ -611,32 +605,20 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Config",
+            "type": "Object",
             "optional": false,
-            "field": "config",
-            "description": "<p>Updated config.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"$__\": {\n        \"strictMode\": true,\n        \"selected\": {},\n        \"getters\": {},\n        \"_id\": {...},\n        \"wasPopulated\": false,\n        \"activePaths\": {...},\n        \"pathsToScopes\": {},\n        \"emitter\": {...},\n        \"$options\": true\n    },\n    \"isNew\": false,\n    \"_doc\": {\n        \"createdAt\": \"2018-03-20T21:04:41.696Z\",\n        \"__v\": 0,\n        \"value\": \"This will show the legalnotice.\",\n        \"updatedAt\": \"2018-03-20T21:04:41.696Z\",\n        \"name\": \"legalnotice\",\n        \"_id\": {...}\n    },\n    \"$init\": true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>something went wrong</p>"
-          }
-        ]
-      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/ConfigController.ts",
@@ -923,13 +905,6 @@
           },
           {
             "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
-          },
-          {
-            "group": "Parameter",
             "type": "IUser",
             "optional": false,
             "field": "currentUser",
@@ -1074,13 +1049,6 @@
             "optional": false,
             "field": "id",
             "description": "<p>Course ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Object",
-            "optional": false,
-            "field": "data",
-            "description": "<p>Body.</p>"
           },
           {
             "group": "Parameter",
@@ -1450,8 +1418,8 @@
   },
   {
     "type": "post",
-    "url": "/api/download/pdf/individual",
-    "title": "Post download request individual PDF",
+    "url": "/api/download/pdf/single",
+    "title": "Post download request single PDF",
     "name": "PostDownload",
     "group": "Download",
     "parameter": {
@@ -1512,8 +1480,8 @@
   },
   {
     "type": "post",
-    "url": "/api/download/pdf/single",
-    "title": "Post download request single PDF",
+    "url": "/api/download/pdf/individual",
+    "title": "Post download request individual PDF",
     "name": "PostDownload",
     "group": "Download",
     "parameter": {
@@ -1602,13 +1570,6 @@
             "optional": false,
             "field": "data",
             "description": "<p>Course data (with courseAdmin).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -1679,13 +1640,6 @@
             "optional": false,
             "field": "data",
             "description": "<p>Lecture data (with courseId).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -1756,13 +1710,6 @@
             "optional": false,
             "field": "data",
             "description": "<p>Unit data (with courseId and lectureId).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -2184,6 +2131,14 @@
     "title": "Delete lecture",
     "name": "DeleteLecture",
     "group": "Lecture",
+    "permission": [
+      {
+        "name": "teacher"
+      },
+      {
+        "name": "admin"
+      }
+    ],
     "parameter": {
       "fields": {
         "Parameter": [
@@ -2212,7 +2167,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"result\": true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -2287,13 +2242,6 @@
             "optional": false,
             "field": "data",
             "description": "<p>New lecture data.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -2448,6 +2396,38 @@
   },
   {
     "type": "get",
+    "url": "/api/count",
+    "title": "get number of messages in a given room",
+    "name": "getMessage",
+    "group": "Message",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "room:",
+            "description": "<p>the room to which the messages belong.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"count\": \"45\"\n\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/MessageController.ts",
+    "groupTitle": "Message"
+  },
+  {
+    "type": "get",
     "url": "/api/message",
     "title": "get all messages in a given room",
     "name": "getMessage",
@@ -2502,38 +2482,6 @@
         {
           "title": "Success-Response:",
           "content": "[\n {\n   author: \"5b2d66c84daf0700d5afe7bf\",\n   chatName: \"student2\",\n   comments: [],\n   content: \"any message\",\n   createdAt: \"2018-06-22T21:14:50.924Z\",\n   room : \"5b2d66c84daf0700d5afe7d8\",\n   updatedAt: \"2018-06-22T21:14:50.924Z\",\n   __v: 0,\n   _id: \"5b2d66ca4daf0700d5aff89c\"\n }\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/MessageController.ts",
-    "groupTitle": "Message"
-  },
-  {
-    "type": "get",
-    "url": "/api/count",
-    "title": "get number of messages in a given room",
-    "name": "getMessage",
-    "group": "Message",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "room:",
-            "description": "<p>the room to which the messages belong.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n   \"count\": \"45\"\n\n}",
           "type": "json"
         }
       ]
@@ -2762,13 +2710,6 @@
             "optional": false,
             "field": "data",
             "description": "<p>Notification text and information on changed course, lecture and unit.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Request",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Request.</p>"
           }
         ]
       }
@@ -4527,18 +4468,6 @@
     "parameter": {
       "fields": {
         "Parameter": [
-          {
-            "group": "Parameter",
-            "optional": false,
-            "field": "data",
-            "description": ""
-          },
-          {
-            "group": "Parameter",
-            "optional": false,
-            "field": "currentUser",
-            "description": ""
-          },
           {
             "group": "Parameter",
             "optional": false,
