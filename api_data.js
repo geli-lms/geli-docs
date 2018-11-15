@@ -2329,76 +2329,10 @@ define({ "api": [
     "groupTitle": "Lecture"
   },
   {
-    "type": "post",
-    "url": "/api/message",
-    "title": "create new message",
-    "name": "PostMessage",
-    "group": "Message",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "IMessage",
-            "optional": false,
-            "field": "created",
-            "description": "<p>Message.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/MessageController.ts",
-    "groupTitle": "Message"
-  },
-  {
-    "type": "post",
-    "url": "/api/message/id/comments",
-    "title": "add a comment to a given message.",
-    "name": "PostMessage",
-    "group": "Message",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id:",
-            "description": "<p>id of the message.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "IMessage",
-            "optional": false,
-            "field": "updated",
-            "description": "<p>Message.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n   author: \"5b2d66c84daf0700d5afe7bf\",\n   chatName: \"student2\",\n   comments: [],\n   content: \"any message\",\n   createdAt: \"2018-06-22T21:14:50.924Z\",\n   room : \"5b2d66c84daf0700d5afe7d8\",\n   updatedAt: \"2018-06-22T21:14:50.924Z\",\n   __v: 0,\n   _id: \"5b2d66ca4daf0700d5aff89c\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/MessageController.ts",
-    "groupTitle": "Message"
-  },
-  {
     "type": "get",
-    "url": "/api/count",
+    "url": "/api/message/count",
     "title": "get number of messages in a given room",
-    "name": "getMessage",
+    "name": "getMessageCount",
     "group": "Message",
     "parameter": {
       "fields": {
@@ -2417,10 +2351,34 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n   \"count\": \"45\"\n\n}",
+          "content": "{\n   \"count\": \"45\"\n}",
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/MessageController.ts",
@@ -2430,7 +2388,7 @@ define({ "api": [
     "type": "get",
     "url": "/api/message",
     "title": "get all messages in a given room",
-    "name": "getMessage",
+    "name": "getMessages",
     "group": "Message",
     "parameter": {
       "fields": {
@@ -2471,7 +2429,7 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "IMessage[]",
+            "type": "IMessageDisplay[]",
             "optional": false,
             "field": "messages",
             "description": "<p>in the given room.</p>"
@@ -2481,10 +2439,34 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "[\n {\n   author: \"5b2d66c84daf0700d5afe7bf\",\n   chatName: \"student2\",\n   comments: [],\n   content: \"any message\",\n   createdAt: \"2018-06-22T21:14:50.924Z\",\n   room : \"5b2d66c84daf0700d5afe7d8\",\n   updatedAt: \"2018-06-22T21:14:50.924Z\",\n   __v: 0,\n   _id: \"5b2d66ca4daf0700d5aff89c\"\n }\n]",
+          "content": "[\n {\n   chatName: \"student2\",\n   comments: [],\n   content: \"any message\",\n   createdAt: \"2018-06-22T21:14:50.924Z\",\n   updatedAt: \"2018-06-22T21:14:50.924Z\",\n   room : \"5b2d66c84daf0700d5afe7d8\",\n   _id: \"5b2d66ca4daf0700d5aff89c\"\n }\n]",
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/MessageController.ts",
