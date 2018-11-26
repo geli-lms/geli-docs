@@ -1569,7 +1569,7 @@ define({ "api": [
             "type": "Object",
             "optional": false,
             "field": "data",
-            "description": "<p>Course data (with courseAdmin).</p>"
+            "description": "<p>Object optionally containing the courseAdmin id for the duplicated course as &quot;courseAdmin&quot;. If unset, the currentUser will be set as courseAdmin.</p>"
           }
         ]
       }
@@ -1582,14 +1582,14 @@ define({ "api": [
             "type": "Course",
             "optional": false,
             "field": "course",
-            "description": "<p>Duplicated course.</p>"
+            "description": "<p>Duplicated course ID.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"_id\": \"5ab19c382ac32e46dcaa1574\",\n    \"updatedAt\": \"2018-03-20T23:41:44.792Z\",\n    \"createdAt\": \"2018-03-20T23:41:44.773Z\",\n    \"name\": \"Test 101 (copy)\",\n    \"description\": \"Some course desc\",\n    \"courseAdmin\": \"5a037e6a60f72236d8e7c813\",\n    \"active\": false,\n    \"__v\": 1,\n    \"whitelist\": [],\n    \"enrollType\": \"whitelist\",\n    \"lectures\": [...],\n    \"students\": [],\n    \"teachers\": [],\n    \"hasAccessKey\": false\n}",
+          "content": "{\n    \"_id\": \"5ab19c382ac32e46dcaa1574\"\n}",
           "type": "json"
         }
       ]
@@ -1652,14 +1652,14 @@ define({ "api": [
             "type": "Lecture",
             "optional": false,
             "field": "lecture",
-            "description": "<p>Duplicated lecture.</p>"
+            "description": "<p>Duplicated lecture ID.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"_id\": \"5ab1a218dab93c34f8541e25\",\n    \"updatedAt\": \"2018-03-21T00:06:48.043Z\",\n    \"createdAt\": \"2018-03-21T00:06:48.043Z\",\n    \"name\": \"Lecture One\",\n    \"description\": \"Some lecture desc\",\n    \"__v\": 0,\n    \"units\": []\n}",
+          "content": "{\n    \"_id\": \"5ab1a218dab93c34f8541e25\"\n}",
           "type": "json"
         }
       ]
@@ -1709,7 +1709,7 @@ define({ "api": [
             "type": "Object",
             "optional": false,
             "field": "data",
-            "description": "<p>Unit data (with courseId and lectureId).</p>"
+            "description": "<p>Object with target lectureId (the unit duplicate will be attached to this lecture).</p>"
           }
         ]
       }
@@ -1722,14 +1722,14 @@ define({ "api": [
             "type": "Unit",
             "optional": false,
             "field": "unit",
-            "description": "<p>Duplicated unit.</p>"
+            "description": "<p>Duplicated unit ID.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"__v\": 0,\n    \"updatedAt\": \"2018-03-21T00:12:48.592Z\",\n    \"createdAt\": \"2018-03-21T00:12:48.592Z\",\n    \"progressable\": false,\n    \"weight\": 0,\n    \"name\": \"First unit\",\n    \"description\": null,\n    \"markdown\": \"Welcome, this is the start\",\n    \"_course\": \"5ab19c382ac32e46dcaa1574\",\n    \"__t\": \"free-text\",\n    \"_id\": \"5ab1a380f5bbeb423070d787\"\n}",
+          "content": "{\n    \"_id\": \"5ab1a380f5bbeb423070d787\"\n}",
           "type": "json"
         }
       ]
