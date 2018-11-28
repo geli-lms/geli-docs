@@ -1600,8 +1600,14 @@
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>Failed to duplicate course</p>"
+            "field": "NotFoundError",
+            "description": "<p>If the course couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserDuplicationAuthorization check failed.</p>"
           }
         ]
       }
@@ -1639,7 +1645,7 @@
             "type": "Object",
             "optional": false,
             "field": "data",
-            "description": "<p>Lecture data (with courseId).</p>"
+            "description": "<p>Object with target courseId (the lecture duplicate will be attached to this course).</p>"
           }
         ]
       }
@@ -1670,8 +1676,14 @@
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>Failed to duplicate lecture</p>"
+            "field": "NotFoundError",
+            "description": "<p>If the lecture or the target courseId couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserDuplicationAuthorization check failed.</p>"
           }
         ]
       }
@@ -1740,8 +1752,14 @@
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>Failed to duplicate unit</p>"
+            "field": "NotFoundError",
+            "description": "<p>If the unit or the target lectureId couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserDuplicationAuthorization check failed.</p>"
           }
         ]
       }
@@ -1797,6 +1815,24 @@
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the course couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserExportAuthorization check failed.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "src/controllers/ExportController.ts",
     "groupTitle": "Export"
@@ -1848,6 +1884,24 @@
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the lecture couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserExportAuthorization check failed.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "src/controllers/ExportController.ts",
     "groupTitle": "Export"
@@ -1898,6 +1952,24 @@
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the unit couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserExportAuthorization check failed.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/ExportController.ts",
