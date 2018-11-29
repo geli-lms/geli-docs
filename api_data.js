@@ -1569,7 +1569,7 @@ define({ "api": [
             "type": "Object",
             "optional": false,
             "field": "data",
-            "description": "<p>Course data (with courseAdmin).</p>"
+            "description": "<p>Object optionally containing the courseAdmin id for the duplicated course as &quot;courseAdmin&quot;. If unset, the currentUser will be set as courseAdmin.</p>"
           }
         ]
       }
@@ -1582,14 +1582,14 @@ define({ "api": [
             "type": "Course",
             "optional": false,
             "field": "course",
-            "description": "<p>Duplicated course.</p>"
+            "description": "<p>Duplicated course ID.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"_id\": \"5ab19c382ac32e46dcaa1574\",\n    \"updatedAt\": \"2018-03-20T23:41:44.792Z\",\n    \"createdAt\": \"2018-03-20T23:41:44.773Z\",\n    \"name\": \"Test 101 (copy)\",\n    \"description\": \"Some course desc\",\n    \"courseAdmin\": \"5a037e6a60f72236d8e7c813\",\n    \"active\": false,\n    \"__v\": 1,\n    \"whitelist\": [],\n    \"enrollType\": \"whitelist\",\n    \"lectures\": [...],\n    \"students\": [],\n    \"teachers\": [],\n    \"hasAccessKey\": false\n}",
+          "content": "{\n    \"_id\": \"5ab19c382ac32e46dcaa1574\"\n}",
           "type": "json"
         }
       ]
@@ -1600,8 +1600,14 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>Failed to duplicate course</p>"
+            "field": "NotFoundError",
+            "description": "<p>If the course couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserDuplicationAuthorization check failed.</p>"
           }
         ]
       }
@@ -1639,7 +1645,7 @@ define({ "api": [
             "type": "Object",
             "optional": false,
             "field": "data",
-            "description": "<p>Lecture data (with courseId).</p>"
+            "description": "<p>Object with target courseId (the lecture duplicate will be attached to this course).</p>"
           }
         ]
       }
@@ -1652,14 +1658,14 @@ define({ "api": [
             "type": "Lecture",
             "optional": false,
             "field": "lecture",
-            "description": "<p>Duplicated lecture.</p>"
+            "description": "<p>Duplicated lecture ID.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"_id\": \"5ab1a218dab93c34f8541e25\",\n    \"updatedAt\": \"2018-03-21T00:06:48.043Z\",\n    \"createdAt\": \"2018-03-21T00:06:48.043Z\",\n    \"name\": \"Lecture One\",\n    \"description\": \"Some lecture desc\",\n    \"__v\": 0,\n    \"units\": []\n}",
+          "content": "{\n    \"_id\": \"5ab1a218dab93c34f8541e25\"\n}",
           "type": "json"
         }
       ]
@@ -1670,8 +1676,14 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>Failed to duplicate lecture</p>"
+            "field": "NotFoundError",
+            "description": "<p>If the lecture or the target courseId couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserDuplicationAuthorization check failed.</p>"
           }
         ]
       }
@@ -1709,7 +1721,7 @@ define({ "api": [
             "type": "Object",
             "optional": false,
             "field": "data",
-            "description": "<p>Unit data (with courseId and lectureId).</p>"
+            "description": "<p>Object with target lectureId (the unit duplicate will be attached to this lecture).</p>"
           }
         ]
       }
@@ -1722,14 +1734,14 @@ define({ "api": [
             "type": "Unit",
             "optional": false,
             "field": "unit",
-            "description": "<p>Duplicated unit.</p>"
+            "description": "<p>Duplicated unit ID.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"__v\": 0,\n    \"updatedAt\": \"2018-03-21T00:12:48.592Z\",\n    \"createdAt\": \"2018-03-21T00:12:48.592Z\",\n    \"progressable\": false,\n    \"weight\": 0,\n    \"name\": \"First unit\",\n    \"description\": null,\n    \"markdown\": \"Welcome, this is the start\",\n    \"_course\": \"5ab19c382ac32e46dcaa1574\",\n    \"__t\": \"free-text\",\n    \"_id\": \"5ab1a380f5bbeb423070d787\"\n}",
+          "content": "{\n    \"_id\": \"5ab1a380f5bbeb423070d787\"\n}",
           "type": "json"
         }
       ]
@@ -1740,8 +1752,14 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>Failed to duplicate unit</p>"
+            "field": "NotFoundError",
+            "description": "<p>If the unit or the target lectureId couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserDuplicationAuthorization check failed.</p>"
           }
         ]
       }
@@ -1797,6 +1815,24 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the course couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserExportAuthorization check failed.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "src/controllers/ExportController.ts",
     "groupTitle": "Export"
@@ -1848,6 +1884,24 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the lecture couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserExportAuthorization check failed.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "src/controllers/ExportController.ts",
     "groupTitle": "Export"
@@ -1898,6 +1952,24 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the unit couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>assertUserExportAuthorization check failed.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/ExportController.ts",
@@ -2329,76 +2401,10 @@ define({ "api": [
     "groupTitle": "Lecture"
   },
   {
-    "type": "post",
-    "url": "/api/message",
-    "title": "create new message",
-    "name": "PostMessage",
-    "group": "Message",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "IMessage",
-            "optional": false,
-            "field": "created",
-            "description": "<p>Message.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/MessageController.ts",
-    "groupTitle": "Message"
-  },
-  {
-    "type": "post",
-    "url": "/api/message/id/comments",
-    "title": "add a comment to a given message.",
-    "name": "PostMessage",
-    "group": "Message",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id:",
-            "description": "<p>id of the message.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "IMessage",
-            "optional": false,
-            "field": "updated",
-            "description": "<p>Message.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n   author: \"5b2d66c84daf0700d5afe7bf\",\n   chatName: \"student2\",\n   comments: [],\n   content: \"any message\",\n   createdAt: \"2018-06-22T21:14:50.924Z\",\n   room : \"5b2d66c84daf0700d5afe7d8\",\n   updatedAt: \"2018-06-22T21:14:50.924Z\",\n   __v: 0,\n   _id: \"5b2d66ca4daf0700d5aff89c\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/MessageController.ts",
-    "groupTitle": "Message"
-  },
-  {
     "type": "get",
-    "url": "/api/count",
+    "url": "/api/message/count",
     "title": "get number of messages in a given room",
-    "name": "getMessage",
+    "name": "getMessageCount",
     "group": "Message",
     "parameter": {
       "fields": {
@@ -2417,10 +2423,34 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n   \"count\": \"45\"\n\n}",
+          "content": "{\n   \"count\": \"45\"\n}",
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/MessageController.ts",
@@ -2430,7 +2460,7 @@ define({ "api": [
     "type": "get",
     "url": "/api/message",
     "title": "get all messages in a given room",
-    "name": "getMessage",
+    "name": "getMessages",
     "group": "Message",
     "parameter": {
       "fields": {
@@ -2471,7 +2501,7 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "IMessage[]",
+            "type": "IMessageDisplay[]",
             "optional": false,
             "field": "messages",
             "description": "<p>in the given room.</p>"
@@ -2481,10 +2511,34 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "[\n {\n   author: \"5b2d66c84daf0700d5afe7bf\",\n   chatName: \"student2\",\n   comments: [],\n   content: \"any message\",\n   createdAt: \"2018-06-22T21:14:50.924Z\",\n   room : \"5b2d66c84daf0700d5afe7d8\",\n   updatedAt: \"2018-06-22T21:14:50.924Z\",\n   __v: 0,\n   _id: \"5b2d66ca4daf0700d5aff89c\"\n }\n]",
+          "content": "[\n {\n   chatName: \"student2\",\n   comments: [],\n   content: \"any message\",\n   createdAt: \"2018-06-22T21:14:50.924Z\",\n   updatedAt: \"2018-06-22T21:14:50.924Z\",\n   room : \"5b2d66c84daf0700d5afe7d8\",\n   _id: \"5b2d66ca4daf0700d5aff89c\"\n }\n]",
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/MessageController.ts",
