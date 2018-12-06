@@ -2244,6 +2244,24 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the lecture's course couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>userCanEditCourse check failed.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "src/controllers/LectureController.ts",
     "groupTitle": "Lecture"
@@ -2287,6 +2305,24 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the lecture couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>userCanViewCourse check failed.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "src/controllers/LectureController.ts",
     "groupTitle": "Lecture"
@@ -2310,10 +2346,10 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "ILectureCreate",
             "optional": false,
             "field": "data",
-            "description": "<p>New lecture data.</p>"
+            "description": "<p>New lecture data with 'name', 'description' and target 'courseId'.</p>"
           }
         ]
       }
@@ -2337,6 +2373,24 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the courseId couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>userCanEditCourse check failed.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/LectureController.ts",
@@ -2395,6 +2449,24 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the lecture's course couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>userCanEditCourse check failed.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/LectureController.ts",
