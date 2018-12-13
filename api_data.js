@@ -625,6 +625,80 @@ define({ "api": [
     "groupTitle": "Config"
   },
   {
+    "type": "post",
+    "url": "/api/courses/picture/:id",
+    "title": "Add course picture",
+    "name": "AddCoursePicture",
+    "group": "Course",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Course ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "responsiveImageDataRaw",
+            "description": "<p>Image as data object.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "IUser",
+            "optional": false,
+            "field": "currentUser",
+            "description": "<p>Currently logged in user.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "Empty",
+            "description": "<p>object.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"breakpoints\":[\n    {\n      \"screenSize\":0,\n      \"imageSize\":{\n        \"width\":284,\n        \"height\":190\n      },\n      \"pathToImage\":\"uploads/courses/5c0fa2770315e73d6c7babfe_1544542544919_0.jpg\",\n      \"pathToRetinaImage\":\"uploads/courses/5c0fa2770315e73d6c7babfe_1544542544919_0@2x.jpg\"\n    }\n  ],\n  \"_id\":\"5c0fd95871707a3a888ae70a\",\n  \"__t\":\"Picture\",\n  \"name\":\"5c0fa2770315e73d6c7babfe_1544542544919.jpg\",\n  \"link\":\"-\",\n  \"size\":0,\n  \"mimeType\":\"image/jpeg\",\n  \"createdAt\":\"2018-12-11T15:35:52.423Z\",\n  \"updatedAt\":\"2018-12-11T15:35:52.423Z\",\n  \"__v\":0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/CourseController.ts",
+    "groupTitle": "Course"
+  },
+  {
     "type": "delete",
     "url": "/api/courses/:id",
     "title": "Delete course",
@@ -659,6 +733,74 @@ define({ "api": [
             "optional": false,
             "field": "result",
             "description": "<p>Empty object.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/CourseController.ts",
+    "groupTitle": "Course"
+  },
+  {
+    "type": "delete",
+    "url": "/api/courses/picture/:id",
+    "title": "Delete course picture",
+    "name": "DeleteCoursePicture",
+    "group": "Course",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Course ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "IUser",
+            "optional": false,
+            "field": "currentUser",
+            "description": "<p>Currently logged in user.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "Empty",
+            "description": "<p>object.</p>"
           }
         ]
       },
