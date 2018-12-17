@@ -2784,13 +2784,6 @@
             "optional": false,
             "field": "id",
             "description": "<p>Notification ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "IUser",
-            "optional": false,
-            "field": "currentUser",
-            "description": "<p>Currently logged in user.</p>"
           }
         ]
       }
@@ -2802,15 +2795,15 @@
             "group": "Success 200",
             "type": "Object",
             "optional": false,
-            "field": "deletion",
-            "description": "<p>Object with deleted notification.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"$__\": {...},\n    \"isNew\": false,\n    \"_doc\": {\n        \"__v\": 0,\n        \"user\": {...},\n        \"text\": \"Course ProblemSolver has an updated text unit.\",\n        \"isOld\": false,\n        \"changedCourse\": {...},\n        \"changedLecture\": {...},\n        \"changedUnit\": {...},\n        \"createdAt\": \"2018-03-22T00:42:12.577Z\",\n        \"updatedAt\": \"2018-03-22T00:42:12.577Z\",\n        \"_id\": {...}\n    },\n    \"$init\": true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -2833,9 +2826,9 @@
   },
   {
     "type": "get",
-    "url": "/api/notification/user/:id",
-    "title": "Get notifications",
-    "name": "GetNotification",
+    "url": "/api/notification/",
+    "title": "Get own notifications",
+    "name": "GetNotifications",
     "group": "Notification",
     "permission": [
       {
@@ -2848,25 +2841,12 @@
         "name": "admin"
       }
     ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>User ID.</p>"
-          }
-        ]
-      }
-    },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Notification[]",
+            "type": "INotificationView[]",
             "optional": false,
             "field": "notifications",
             "description": "<p>List of notifications.</p>"
@@ -2876,7 +2856,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "[{\n    \"_id\": \"5ab2fbe464efe60006cef0b1\",\n    \"updatedAt\": \"2018-03-22T00:42:12.577Z\",\n    \"createdAt\": \"2018-03-22T00:42:12.577Z\",\n    \"changedUnit\": {...},\n    \"changedLecture\": {...},\n    \"changedCourse\": {...},\n    \"isOld\": false,\n    \"text\": \"Course ProblemSolver has an updated text unit.\",\n    \"user\": {...},\n    \"__v\": 0\n}, {\n    \"_id\": \"5ab2fc7b64efe60006cef0bb\",\n    \"updatedAt\": \"2018-03-22T00:44:43.966Z\",\n    \"createdAt\": \"2018-03-22T00:44:43.966Z\",\n    \"changedUnit\": {...},\n    \"changedLecture\": {...},\n    \"changedCourse\": {...},\n    \"isOld\": false,\n    \"text\": \"Course katacourse has an updated unit.\",\n    \"user\": {...},\n    \"__v\": 0\n}]",
+          "content": "[{\n    \"_id\": \"5ab2fbe464efe60006cef0b1\",\n    \"changedCourse\": \"5c0fb47d8d583532143c68a7\",\n    \"changedLecture\": \"5bdb49f11a09bb3ca8ce0a10\",\n    \"changedUnit\": \"5be0691ee3859d38308dab18\",\n    \"text\": \"Course ProblemSolver has an updated text unit.\",\n    \"isOld\": false\n}, {\n    \"_id\": \"5ab2fc7b64efe60006cef0bb\",\n    \"changedCourse\": \"5be0691ee3859d38308dab19\",\n    \"changedLecture\": \"5bdb49ef1a09bb3ca8ce0a01\",\n    \"changedUnit\": \"5bdb49f11a09bb3ca8ce0a12\",\n    \"text\": \"Course katacourse has an updated unit.\",\n    \"isOld\": false\n}]",
           "type": "json"
         }
       ]
@@ -2907,14 +2887,28 @@
             "type": "String",
             "optional": false,
             "field": "id",
-            "description": "<p>User ID.</p>"
+            "description": "<p>ID of the user that the new notification is assigned/sent to.</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
-            "field": "data",
-            "description": "<p>Notification text and information on changed course, lecture and unit.</p>"
+            "field": "targetId",
+            "description": "<p>Target id of the changed course, lecture or unit.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "targetType",
+            "description": "<p>Which type the targetId represents: Either 'course', 'lecture', 'unit' or 'text'. The 'text' type only uses the 'text' parameter while ignoring the 'targetId'.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>Message that the new notification(s) will contain.</p>"
           }
         ]
       }
@@ -2924,17 +2918,17 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Boolean",
+            "type": "Object",
             "optional": false,
-            "field": "notified",
-            "description": "<p>Confirmation of notification.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    notified: true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -2945,8 +2939,26 @@
           {
             "group": "Error 4xx",
             "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>Did not find the targetId of targetType.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": "<p>Invalid targetType.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>The teacher doen't have access to the corresponding course (if targetType isn't 'text'-only).</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Failed to create notification</p>"
+            "description": "<p>No course was found for a given existing lecture.</p>"
           }
         ]
       }
@@ -2974,10 +2986,24 @@
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
-            "field": "data",
-            "description": "<p>Notification text and information on changed course, lecture and unit.</p>"
+            "field": "targetId",
+            "description": "<p>Target id of the changed course, lecture or unit.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "targetType",
+            "description": "<p>Which type the targetId represents: Either 'course', 'lecture' or 'unit'.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>Message that the new notification(s) will contain.</p>"
           }
         ]
       }
@@ -2987,17 +3013,17 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Boolean",
+            "type": "Object",
             "optional": false,
-            "field": "notified",
-            "description": "<p>Confirmation of notification.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    notified: true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -3008,14 +3034,26 @@
           {
             "group": "Error 4xx",
             "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>Did not find the targetId of targetType.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
             "field": "BadRequestError",
-            "description": "<p>Notification needs at least the fields course and text</p>"
+            "description": "<p>Invalid targetType.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>The teacher doen't have access to the corresponding course.</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Failed to create notification</p>"
+            "description": "<p>No course was found for a given existing lecture.</p>"
           }
         ]
       }
