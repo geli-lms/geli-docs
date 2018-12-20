@@ -625,6 +625,80 @@ define({ "api": [
     "groupTitle": "Config"
   },
   {
+    "type": "post",
+    "url": "/api/courses/picture/:id",
+    "title": "Add course picture",
+    "name": "AddCoursePicture",
+    "group": "Course",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Course ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "responsiveImageDataRaw",
+            "description": "<p>Image as data object.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "IUser",
+            "optional": false,
+            "field": "currentUser",
+            "description": "<p>Currently logged in user.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "Empty",
+            "description": "<p>object.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"breakpoints\":[\n    {\n      \"screenSize\":0,\n      \"imageSize\":{\n        \"width\":284,\n        \"height\":190\n      },\n      \"pathToImage\":\"uploads/courses/5c0fa2770315e73d6c7babfe_1544542544919_0.jpg\",\n      \"pathToRetinaImage\":\"uploads/courses/5c0fa2770315e73d6c7babfe_1544542544919_0@2x.jpg\"\n    }\n  ],\n  \"_id\":\"5c0fd95871707a3a888ae70a\",\n  \"__t\":\"Picture\",\n  \"name\":\"5c0fa2770315e73d6c7babfe_1544542544919.jpg\",\n  \"link\":\"-\",\n  \"size\":0,\n  \"mimeType\":\"image/jpeg\",\n  \"createdAt\":\"2018-12-11T15:35:52.423Z\",\n  \"updatedAt\":\"2018-12-11T15:35:52.423Z\",\n  \"__v\":0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/CourseController.ts",
+    "groupTitle": "Course"
+  },
+  {
     "type": "delete",
     "url": "/api/courses/:id",
     "title": "Delete course",
@@ -659,6 +733,74 @@ define({ "api": [
             "optional": false,
             "field": "result",
             "description": "<p>Empty object.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/CourseController.ts",
+    "groupTitle": "Course"
+  },
+  {
+    "type": "delete",
+    "url": "/api/courses/picture/:id",
+    "title": "Delete course picture",
+    "name": "DeleteCoursePicture",
+    "group": "Course",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Course ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "IUser",
+            "optional": false,
+            "field": "currentUser",
+            "description": "<p>Currently logged in user.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "Empty",
+            "description": "<p>object.</p>"
           }
         ]
       },
@@ -2244,6 +2386,24 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the lecture's course couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>userCanEditCourse check failed.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "src/controllers/LectureController.ts",
     "groupTitle": "Lecture"
@@ -2287,6 +2447,24 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the lecture couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>userCanViewCourse check failed.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "src/controllers/LectureController.ts",
     "groupTitle": "Lecture"
@@ -2310,10 +2488,10 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "ILectureCreate",
             "optional": false,
             "field": "data",
-            "description": "<p>New lecture data.</p>"
+            "description": "<p>New lecture data with 'name', 'description' and target 'courseId'.</p>"
           }
         ]
       }
@@ -2337,6 +2515,24 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the courseId couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>userCanEditCourse check failed.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/LectureController.ts",
@@ -2395,6 +2591,24 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>If the lecture's course couldn't be found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>userCanEditCourse check failed.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/LectureController.ts",
@@ -2570,13 +2784,6 @@ define({ "api": [
             "optional": false,
             "field": "id",
             "description": "<p>Notification ID.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "IUser",
-            "optional": false,
-            "field": "currentUser",
-            "description": "<p>Currently logged in user.</p>"
           }
         ]
       }
@@ -2588,15 +2795,15 @@ define({ "api": [
             "group": "Success 200",
             "type": "Object",
             "optional": false,
-            "field": "deletion",
-            "description": "<p>Object with deleted notification.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"$__\": {...},\n    \"isNew\": false,\n    \"_doc\": {\n        \"__v\": 0,\n        \"user\": {...},\n        \"text\": \"Course ProblemSolver has an updated text unit.\",\n        \"isOld\": false,\n        \"changedCourse\": {...},\n        \"changedLecture\": {...},\n        \"changedUnit\": {...},\n        \"createdAt\": \"2018-03-22T00:42:12.577Z\",\n        \"updatedAt\": \"2018-03-22T00:42:12.577Z\",\n        \"_id\": {...}\n    },\n    \"$init\": true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -2619,9 +2826,9 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/notification/user/:id",
-    "title": "Get notifications",
-    "name": "GetNotification",
+    "url": "/api/notification/",
+    "title": "Get own notifications",
+    "name": "GetNotifications",
     "group": "Notification",
     "permission": [
       {
@@ -2634,25 +2841,12 @@ define({ "api": [
         "name": "admin"
       }
     ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>User ID.</p>"
-          }
-        ]
-      }
-    },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Notification[]",
+            "type": "INotificationView[]",
             "optional": false,
             "field": "notifications",
             "description": "<p>List of notifications.</p>"
@@ -2662,7 +2856,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "[{\n    \"_id\": \"5ab2fbe464efe60006cef0b1\",\n    \"updatedAt\": \"2018-03-22T00:42:12.577Z\",\n    \"createdAt\": \"2018-03-22T00:42:12.577Z\",\n    \"changedUnit\": {...},\n    \"changedLecture\": {...},\n    \"changedCourse\": {...},\n    \"isOld\": false,\n    \"text\": \"Course ProblemSolver has an updated text unit.\",\n    \"user\": {...},\n    \"__v\": 0\n}, {\n    \"_id\": \"5ab2fc7b64efe60006cef0bb\",\n    \"updatedAt\": \"2018-03-22T00:44:43.966Z\",\n    \"createdAt\": \"2018-03-22T00:44:43.966Z\",\n    \"changedUnit\": {...},\n    \"changedLecture\": {...},\n    \"changedCourse\": {...},\n    \"isOld\": false,\n    \"text\": \"Course katacourse has an updated unit.\",\n    \"user\": {...},\n    \"__v\": 0\n}]",
+          "content": "[{\n    \"_id\": \"5ab2fbe464efe60006cef0b1\",\n    \"changedCourse\": \"5c0fb47d8d583532143c68a7\",\n    \"changedLecture\": \"5bdb49f11a09bb3ca8ce0a10\",\n    \"changedUnit\": \"5be0691ee3859d38308dab18\",\n    \"text\": \"Course ProblemSolver has an updated text unit.\",\n    \"isOld\": false\n}, {\n    \"_id\": \"5ab2fc7b64efe60006cef0bb\",\n    \"changedCourse\": \"5be0691ee3859d38308dab19\",\n    \"changedLecture\": \"5bdb49ef1a09bb3ca8ce0a01\",\n    \"changedUnit\": \"5bdb49f11a09bb3ca8ce0a12\",\n    \"text\": \"Course katacourse has an updated unit.\",\n    \"isOld\": false\n}]",
           "type": "json"
         }
       ]
@@ -2693,14 +2887,28 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "id",
-            "description": "<p>User ID.</p>"
+            "description": "<p>ID of the user that the new notification is assigned/sent to.</p>"
           },
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
-            "field": "data",
-            "description": "<p>Notification text and information on changed course, lecture and unit.</p>"
+            "field": "targetId",
+            "description": "<p>Target id of the changed course, lecture or unit.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "targetType",
+            "description": "<p>Which type the targetId represents: Either 'course', 'lecture', 'unit' or 'text'. The 'text' type only uses the 'text' parameter while ignoring the 'targetId'.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>Message that the new notification(s) will contain.</p>"
           }
         ]
       }
@@ -2710,17 +2918,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Boolean",
+            "type": "Object",
             "optional": false,
-            "field": "notified",
-            "description": "<p>Confirmation of notification.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    notified: true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -2731,8 +2939,26 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>Did not find the targetId of targetType.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": "<p>Invalid targetType.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>The teacher doesn't have access to the corresponding course (if targetType isn't 'text'-only).</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Failed to create notification</p>"
+            "description": "<p>No course was found for a given existing lecture.</p>"
           }
         ]
       }
@@ -2760,10 +2986,24 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Object",
+            "type": "String",
             "optional": false,
-            "field": "data",
-            "description": "<p>Notification text and information on changed course, lecture and unit.</p>"
+            "field": "targetId",
+            "description": "<p>Target id of the changed course, lecture or unit.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "targetType",
+            "description": "<p>Which type the targetId represents: Either 'course', 'lecture' or 'unit'.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "text",
+            "description": "<p>Message that the new notification(s) will contain.</p>"
           }
         ]
       }
@@ -2773,17 +3013,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Boolean",
+            "type": "Object",
             "optional": false,
-            "field": "notified",
-            "description": "<p>Confirmation of notification.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    notified: true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -2794,14 +3034,26 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>Did not find the targetId of targetType.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
             "field": "BadRequestError",
-            "description": "<p>Notification needs at least the fields course and text</p>"
+            "description": "<p>Invalid targetType.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>The teacher doesn't have access to the corresponding course.</p>"
           },
           {
             "group": "Error 4xx",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Failed to create notification</p>"
+            "description": "<p>No course was found for a given existing lecture.</p>"
           }
         ]
       }
@@ -2812,8 +3064,8 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/notificationSettings/user/:id",
-    "title": "Get notification settings per user",
+    "url": "/api/notificationSettings/",
+    "title": "Get own notification settings for all courses",
     "name": "GetNotificationSettings",
     "group": "NotificationSettings",
     "permission": [
@@ -2827,25 +3079,12 @@ define({ "api": [
         "name": "admin"
       }
     ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>User ID.</p>"
-          }
-        ]
-      }
-    },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "INotificationSettingsModel[]",
+            "type": "INotificationSettingsView[]",
             "optional": false,
             "field": "settings",
             "description": "<p>List of notification settings.</p>"
@@ -2855,76 +3094,10 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "[{\n    \"_id\": \"5ab2829142949f000857b8f8\",\n    \"updatedAt\": \"2018-03-21T16:04:33.335Z\",\n    \"createdAt\": \"2018-03-21T16:04:33.335Z\",\n    \"user\": {...},\n    \"course\": {...},\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": false,\n    \"__v\": 0\n}, {\n    \"_id\": \"5ab283b342949f000857b8f9\",\n    \"updatedAt\": \"2018-03-21T16:09:23.542Z\",\n    \"createdAt\": \"2018-03-21T16:09:23.542Z\",\n    \"user\": {...},\n    \"course\": {...},\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": false,\n    \"__v\": 0\n]}",
+          "content": "[{\n    \"_id\": \"5ab2829142949f000857b8f8\",\n    \"course\": \"5be0691ee3859d38308dab19\",\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": false\n}, {\n    \"_id\": \"5ab283b342949f000857b8f9\",\n    \"course\": \"5c0fb47d8d583532143c68a7\",\n    \"notificationType\": \"relatedChanges\",\n    \"emailNotification\": true\n}]",
           "type": "json"
         }
       ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/NotificationSettingsController.ts",
-    "groupTitle": "NotificationSettings"
-  },
-  {
-    "type": "post",
-    "url": "/api/notificationSettings/",
-    "title": "Create notification settings",
-    "name": "PostNotificationSettings",
-    "group": "NotificationSettings",
-    "permission": [
-      {
-        "name": "student"
-      },
-      {
-        "name": "teacher"
-      },
-      {
-        "name": "admin"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Object",
-            "optional": false,
-            "field": "data",
-            "description": "<p>Data for new notification settings.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "INotificationSettingsModel",
-            "optional": false,
-            "field": "settings",
-            "description": "<p>Created notification settings.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n    \"_id\": \"5ab283b342949f000857b8f9\",\n    \"updatedAt\": \"2018-03-21T16:09:23.542Z\",\n    \"createdAt\": \"2018-03-21T16:09:23.542Z\",\n    \"user\": {...},\n    \"course\": {...},\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": true,\n    \"__v\": 0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "BadRequestError",
-            "description": "<p>NotificationSettings need course and user</p>"
-          }
-        ]
-      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/NotificationSettingsController.ts",
@@ -2932,8 +3105,8 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/api/notificationSettings/user/:id",
-    "title": "Update notification settings",
+    "url": "/api/notificationSettings/",
+    "title": "Set notification settings for a course (i.e. create or update them)",
     "name": "PutNotificationSettings",
     "group": "NotificationSettings",
     "permission": [
@@ -2954,15 +3127,22 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>ID of notification settings.</p>"
+            "field": "course",
+            "description": "<p>ID of the course for which notification settings are to be set.</p>"
           },
           {
             "group": "Parameter",
-            "type": "INotificationSettings",
+            "type": "String",
             "optional": false,
-            "field": "notificationSettings",
-            "description": "<p>New notification settings.</p>"
+            "field": "notificationType",
+            "description": "<p>New value for the primary notification setting (none/relatedChanges/allChanges).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "emailNotification",
+            "description": "<p>New value for the email notification setting.</p>"
           }
         ]
       }
@@ -2972,17 +3152,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "INotificationSettingsModel",
+            "type": "Object",
             "optional": false,
-            "field": "settings",
-            "description": "<p>Updated notification settings.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"_id\": \"5ab283b342949f000857b8f9\",\n    \"updatedAt\": \"2018-03-21T16:09:23.542Z\",\n    \"createdAt\": \"2018-03-21T16:09:23.542Z\",\n    \"user\": {...},\n    \"course\": {...},\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": true,\n    \"__v\": 0\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -2993,8 +3173,14 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "BadRequestError",
-            "description": "<p>notification needs fields course and user</p>"
+            "field": "NotFoundError",
+            "description": "<p>Did not find the given course.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>User doesn't have access to the given course.</p>"
           }
         ]
       }
