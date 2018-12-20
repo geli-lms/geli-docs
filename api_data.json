@@ -2952,7 +2952,7 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "ForbiddenError",
-            "description": "<p>The teacher doen't have access to the corresponding course (if targetType isn't 'text'-only).</p>"
+            "description": "<p>The teacher doesn't have access to the corresponding course (if targetType isn't 'text'-only).</p>"
           },
           {
             "group": "Error 4xx",
@@ -3047,7 +3047,7 @@
             "group": "Error 4xx",
             "optional": false,
             "field": "ForbiddenError",
-            "description": "<p>The teacher doen't have access to the corresponding course.</p>"
+            "description": "<p>The teacher doesn't have access to the corresponding course.</p>"
           },
           {
             "group": "Error 4xx",
@@ -3064,8 +3064,8 @@
   },
   {
     "type": "get",
-    "url": "/api/notificationSettings/user/:id",
-    "title": "Get notification settings per user",
+    "url": "/api/notificationSettings/",
+    "title": "Get own notification settings for all courses",
     "name": "GetNotificationSettings",
     "group": "NotificationSettings",
     "permission": [
@@ -3079,25 +3079,12 @@
         "name": "admin"
       }
     ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>User ID.</p>"
-          }
-        ]
-      }
-    },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "INotificationSettingsModel[]",
+            "type": "INotificationSettingsView[]",
             "optional": false,
             "field": "settings",
             "description": "<p>List of notification settings.</p>"
@@ -3107,76 +3094,10 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "[{\n    \"_id\": \"5ab2829142949f000857b8f8\",\n    \"updatedAt\": \"2018-03-21T16:04:33.335Z\",\n    \"createdAt\": \"2018-03-21T16:04:33.335Z\",\n    \"user\": {...},\n    \"course\": {...},\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": false,\n    \"__v\": 0\n}, {\n    \"_id\": \"5ab283b342949f000857b8f9\",\n    \"updatedAt\": \"2018-03-21T16:09:23.542Z\",\n    \"createdAt\": \"2018-03-21T16:09:23.542Z\",\n    \"user\": {...},\n    \"course\": {...},\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": false,\n    \"__v\": 0\n]}",
+          "content": "[{\n    \"_id\": \"5ab2829142949f000857b8f8\",\n    \"course\": \"5be0691ee3859d38308dab19\",\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": false\n}, {\n    \"_id\": \"5ab283b342949f000857b8f9\",\n    \"course\": \"5c0fb47d8d583532143c68a7\",\n    \"notificationType\": \"relatedChanges\",\n    \"emailNotification\": true\n}]",
           "type": "json"
         }
       ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/NotificationSettingsController.ts",
-    "groupTitle": "NotificationSettings"
-  },
-  {
-    "type": "post",
-    "url": "/api/notificationSettings/",
-    "title": "Create notification settings",
-    "name": "PostNotificationSettings",
-    "group": "NotificationSettings",
-    "permission": [
-      {
-        "name": "student"
-      },
-      {
-        "name": "teacher"
-      },
-      {
-        "name": "admin"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Object",
-            "optional": false,
-            "field": "data",
-            "description": "<p>Data for new notification settings.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "INotificationSettingsModel",
-            "optional": false,
-            "field": "settings",
-            "description": "<p>Created notification settings.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\n    \"_id\": \"5ab283b342949f000857b8f9\",\n    \"updatedAt\": \"2018-03-21T16:09:23.542Z\",\n    \"createdAt\": \"2018-03-21T16:09:23.542Z\",\n    \"user\": {...},\n    \"course\": {...},\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": true,\n    \"__v\": 0\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "BadRequestError",
-            "description": "<p>NotificationSettings need course and user</p>"
-          }
-        ]
-      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/NotificationSettingsController.ts",
@@ -3184,8 +3105,8 @@
   },
   {
     "type": "put",
-    "url": "/api/notificationSettings/user/:id",
-    "title": "Update notification settings",
+    "url": "/api/notificationSettings/",
+    "title": "Set notification settings for a course (i.e. create or update them)",
     "name": "PutNotificationSettings",
     "group": "NotificationSettings",
     "permission": [
@@ -3206,15 +3127,22 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>ID of notification settings.</p>"
+            "field": "course",
+            "description": "<p>ID of the course for which notification settings are to be set.</p>"
           },
           {
             "group": "Parameter",
-            "type": "INotificationSettings",
+            "type": "String",
             "optional": false,
-            "field": "notificationSettings",
-            "description": "<p>New notification settings.</p>"
+            "field": "notificationType",
+            "description": "<p>New value for the primary notification setting (none/relatedChanges/allChanges).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "emailNotification",
+            "description": "<p>New value for the email notification setting.</p>"
           }
         ]
       }
@@ -3224,17 +3152,17 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "INotificationSettingsModel",
+            "type": "Object",
             "optional": false,
-            "field": "settings",
-            "description": "<p>Updated notification settings.</p>"
+            "field": "result",
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"_id\": \"5ab283b342949f000857b8f9\",\n    \"updatedAt\": \"2018-03-21T16:09:23.542Z\",\n    \"createdAt\": \"2018-03-21T16:09:23.542Z\",\n    \"user\": {...},\n    \"course\": {...},\n    \"notificationType\": \"allChanges\",\n    \"emailNotification\": true,\n    \"__v\": 0\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -3245,8 +3173,14 @@
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "BadRequestError",
-            "description": "<p>notification needs fields course and user</p>"
+            "field": "NotFoundError",
+            "description": "<p>Did not find the given course.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": "<p>User doesn't have access to the given course.</p>"
           }
         ]
       }
