@@ -1560,8 +1560,8 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/download/pdf/single",
-    "title": "Post download request single PDF",
+    "url": "/api/download/pdf/individual",
+    "title": "Post download request individual PDF",
     "name": "PostDownload",
     "group": "Download",
     "parameter": {
@@ -1622,8 +1622,8 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/download/pdf/individual",
-    "title": "Post download request individual PDF",
+    "url": "/api/download/pdf/single",
+    "title": "Post download request single PDF",
     "name": "PostDownload",
     "group": "Download",
     "parameter": {
@@ -3191,49 +3191,6 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/progress/courses/:id",
-    "title": "Get course progress",
-    "name": "GetCourseProgress",
-    "group": "Progress",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Course ID.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Progress[]",
-            "optional": false,
-            "field": "progresses",
-            "description": "<p>List of progress.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "[{\n    \"_id\": \"5ab2b9516fab4a3ae0cd6737\",\n    \"done\": false,\n    \"updatedAt\": \"2018-03-21T19:58:09.386Z\",\n    \"createdAt\": \"2018-03-21T19:58:09.386Z\",\n    \"unit\": \"5ab2b80a6fab4a3ae0cd672d\",\n    \"course\": \"5a53c474a347af01b84e54b7\",\n    \"answers\": {\n        \"5ab2b80a6fab4a3ae0cd672e\": {\n            \"5ab2b80a6fab4a3ae0cd6730\": true,\n            \"5ab2b80a6fab4a3ae0cd672f\": false\n        },\n        \"5ab2b8dd6fab4a3ae0cd6734\": {\n            \"5ab2b8dd6fab4a3ae0cd6736\": false,\n            \"5ab2b8dd6fab4a3ae0cd6735\": true\n        },\n        \"5ab2b8dd6fab4a3ae0cd6731\": {\n            \"5ab2b8dd6fab4a3ae0cd6733\": false,\n            \"5ab2b8dd6fab4a3ae0cd6732\": true\n        }\n    },\n    \"type\": \"task-unit-progress\",\n    \"user\": \"5a037e6a60f72236d8e7c813\",\n    \"__v\": 0,\n    \"__t\": \"task-unit-progress\",\n    \"id\": \"5ab2b9516fab4a3ae0cd6737\"\n}]",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/ProgressController.ts",
-    "groupTitle": "Progress"
-  },
-  {
-    "type": "get",
     "url": "/api/progress/units/:id",
     "title": "Get unit progress",
     "name": "GetUnitProgress",
@@ -3256,102 +3213,13 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Progress[]",
+            "type": "Progress",
             "optional": false,
-            "field": "progresses",
-            "description": "<p>Progress.</p>"
+            "field": "progress",
+            "description": "<p>Progress data or an empty object if no data is available.</p>"
           }
         ]
       },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "[{\n    \"_id\": \"5ab2b9516fab4a3ae0cd6737\",\n    \"done\": false,\n    \"updatedAt\": \"2018-03-21T19:58:09.386Z\",\n    \"createdAt\": \"2018-03-21T19:58:09.386Z\",\n    \"unit\": \"5ab2b80a6fab4a3ae0cd672d\",\n    \"course\": \"5a53c474a347af01b84e54b7\",\n    \"answers\": {\n        \"5ab2b80a6fab4a3ae0cd672e\": {\n            \"5ab2b80a6fab4a3ae0cd6730\": true,\n            \"5ab2b80a6fab4a3ae0cd672f\": false\n        },\n        \"5ab2b8dd6fab4a3ae0cd6734\": {\n            \"5ab2b8dd6fab4a3ae0cd6736\": false,\n            \"5ab2b8dd6fab4a3ae0cd6735\": true\n        },\n        \"5ab2b8dd6fab4a3ae0cd6731\": {\n            \"5ab2b8dd6fab4a3ae0cd6733\": false,\n            \"5ab2b8dd6fab4a3ae0cd6732\": true\n        }\n    },\n    \"type\": \"task-unit-progress\",\n    \"user\": \"5a037e6a60f72236d8e7c813\",\n    \"__v\": 0,\n    \"__t\": \"task-unit-progress\",\n    \"id\": \"5ab2b9516fab4a3ae0cd6737\"\n}]",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/ProgressController.ts",
-    "groupTitle": "Progress"
-  },
-  {
-    "type": "get",
-    "url": "/api/progress/users/:id",
-    "title": "Get user progress",
-    "name": "GetUserProgress",
-    "group": "Progress",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>User ID.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Progress[]",
-            "optional": false,
-            "field": "progresses",
-            "description": "<p>List of progress.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "[{\n    \"_id\": \"5ab2b9516fab4a3ae0cd6737\",\n    \"done\": false,\n    \"updatedAt\": \"2018-03-21T19:58:09.386Z\",\n    \"createdAt\": \"2018-03-21T19:58:09.386Z\",\n    \"unit\": \"5ab2b80a6fab4a3ae0cd672d\",\n    \"course\": \"5a53c474a347af01b84e54b7\",\n    \"answers\": {\n        \"5ab2b80a6fab4a3ae0cd672e\": {\n            \"5ab2b80a6fab4a3ae0cd6730\": true,\n            \"5ab2b80a6fab4a3ae0cd672f\": false\n        },\n        \"5ab2b8dd6fab4a3ae0cd6734\": {\n            \"5ab2b8dd6fab4a3ae0cd6736\": false,\n            \"5ab2b8dd6fab4a3ae0cd6735\": true\n        },\n        \"5ab2b8dd6fab4a3ae0cd6731\": {\n            \"5ab2b8dd6fab4a3ae0cd6733\": false,\n            \"5ab2b8dd6fab4a3ae0cd6732\": true\n        }\n    },\n    \"type\": \"task-unit-progress\",\n    \"user\": \"5a037e6a60f72236d8e7c813\",\n    \"__v\": 0,\n    \"__t\": \"task-unit-progress\",\n    \"id\": \"5ab2b9516fab4a3ae0cd6737\"\n}]",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/controllers/ProgressController.ts",
-    "groupTitle": "Progress"
-  },
-  {
-    "type": "post",
-    "url": "/api/progress/",
-    "title": "Create progress",
-    "name": "PostProgress",
-    "group": "Progress",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "IProgress",
-            "optional": false,
-            "field": "data",
-            "description": "<p>Progress data.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "IUser",
-            "optional": false,
-            "field": "currentUser",
-            "description": "<p>Currently logged in user.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Notification ID.@apiSuccess {Progress} progress Created progress.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
       "examples": [
         {
           "title": "Success-Response:",
@@ -3366,8 +3234,8 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "BadRequestError",
-            "description": "<p>progress need fields course, user and unit</p>"
+            "field": "ForbiddenError",
+            "description": ""
           }
         ]
       }
@@ -3378,8 +3246,8 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/api/progress/:id",
-    "title": "Update progress",
+    "url": "/api/progress/",
+    "title": "Set progress for a unit (i.e. create or update it idempotently)",
     "name": "PutProgress",
     "group": "Progress",
     "parameter": {
@@ -3428,7 +3296,7 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "NotFoundError",
+            "field": "ForbiddenError",
             "description": ""
           }
         ]
