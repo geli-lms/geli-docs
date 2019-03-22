@@ -3617,17 +3617,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Boolean",
+            "type": "Object",
             "optional": false,
             "field": "result",
-            "description": "<p>Confirmation of deletion.</p>"
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"result\": true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
@@ -3639,6 +3639,12 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
             "description": ""
           }
         ]
@@ -3686,6 +3692,24 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "src/controllers/UnitController.ts",
@@ -3753,6 +3777,12 @@ define({ "api": [
             "optional": false,
             "field": "BadRequestError",
             "description": "<p>Invalid combination of file upload and unit data.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
           },
           {
             "group": "Error 4xx",
@@ -3834,14 +3864,20 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
+            "field": "BadRequestError",
+            "description": "<p>Invalid combination of file upload and unit data.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
             "field": "NotFoundError",
             "description": ""
           },
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "BadRequestError",
-            "description": "<p>Invalid combination of file upload and unit data.</p>"
+            "field": "ForbiddenError",
+            "description": ""
           },
           {
             "group": "Error 4xx",
