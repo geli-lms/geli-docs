@@ -4401,17 +4401,17 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Boolean",
+            "type": "Object",
             "optional": false,
             "field": "result",
-            "description": "<p>Confirmation of deletion.</p>"
+            "description": "<p>Empty object.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    result: true\n}",
+          "content": "{}",
           "type": "json"
         }
       ]
