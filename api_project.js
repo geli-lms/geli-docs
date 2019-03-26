@@ -1,13 +1,13 @@
 define({
   "description": "Documentation",
   "name": "geli-api",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2019-03-26T18:36:58.801Z",
+    "time": "2019-03-26T21:41:04.001Z",
     "url": "http://apidocjs.com",
     "version": "0.17.6"
   }

@@ -3790,6 +3790,13 @@ define({ "api": [
             "optional": false,
             "field": "id",
             "description": "<p>Unit ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "assignment",
+            "description": "<p>Assignment id.</p>"
           }
         ]
       }
@@ -4885,6 +4892,33 @@ define({ "api": [
     "groupTitle": "Whitelist"
   },
   {
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "unitId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "uploadedFile",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "IUser",
+            "optional": false,
+            "field": "currentUser",
+            "description": ""
+          }
+        ]
+      }
+    },
     "error": {
       "fields": {
         "Error 4xx": [
