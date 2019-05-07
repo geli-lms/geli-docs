@@ -1612,6 +1612,18 @@ define({ "api": [
             "optional": false,
             "field": "NotFoundError",
             "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": ""
           }
         ]
       }
@@ -1673,6 +1685,18 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
             "description": ""
           }
         ]
