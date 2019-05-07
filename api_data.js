@@ -1612,6 +1612,18 @@ define({ "api": [
             "optional": false,
             "field": "NotFoundError",
             "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": ""
           }
         ]
       }
@@ -1673,6 +1685,18 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ForbiddenError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
             "description": ""
           }
         ]
@@ -3587,6 +3611,66 @@ define({ "api": [
   },
   {
     "type": "delete",
+    "url": "/api/units/:id/assignment",
+    "title": "Delete assignment",
+    "name": "DeleteAssginment",
+    "group": "Unit",
+    "permission": [
+      {
+        "name": "student"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unit ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "result",
+            "description": "<p>Confirmation of deletion.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"result\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/UnitController.ts",
+    "groupTitle": "Unit"
+  },
+  {
+    "type": "delete",
     "url": "/api/units/:id",
     "title": "Delete unit",
     "name": "DeleteUnit",
@@ -3706,6 +3790,152 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "ForbiddenError",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/UnitController.ts",
+    "groupTitle": "Unit"
+  },
+  {
+    "type": "get",
+    "url": "/api/units/:id/assignments/:assignment",
+    "title": "Request unit",
+    "name": "GetUnit",
+    "group": "Unit",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unit ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "assignment",
+            "description": "<p>Assignment id.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Unit",
+            "optional": false,
+            "field": "unit",
+            "description": "<p>Unit.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"_id\": \"5a037e6b60f72236d8e7c858\",\n    \"updatedAt\": \"2017-11-08T22:00:11.500Z\",\n    \"createdAt\": \"2017-11-08T22:00:11.500Z\",\n    \"name\": \"What is Lorem Ipsum?\",\n    \"description\": \"...\",\n    \"markdown\": \"# What is Lorem Ipsum?\\n**Lorem Ipsum** is simply dummy text of the printing and typesetting industry.\",\n    \"_course\": \"5a037e6b60f72236d8e7c83b\",\n    \"unitCreator\": \"5a037e6b60f72236d8e7c834\",\n    \"type\": \"free-text\",\n    \"__v\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/UnitController.ts",
+    "groupTitle": "Unit"
+  },
+  {
+    "type": "get",
+    "url": "/api/units/:id/assignments",
+    "title": "Request unit",
+    "name": "GetUnit",
+    "group": "Unit",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unit ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Unit",
+            "optional": false,
+            "field": "unit",
+            "description": "<p>Unit.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"_id\": \"5a037e6b60f72236d8e7c858\",\n    \"updatedAt\": \"2017-11-08T22:00:11.500Z\",\n    \"createdAt\": \"2017-11-08T22:00:11.500Z\",\n    \"name\": \"What is Lorem Ipsum?\",\n    \"description\": \"...\",\n    \"markdown\": \"# What is Lorem Ipsum?\\n**Lorem Ipsum** is simply dummy text of the printing and typesetting industry.\",\n    \"_course\": \"5a037e6b60f72236d8e7c83b\",\n    \"unitCreator\": \"5a037e6b60f72236d8e7c834\",\n    \"type\": \"free-text\",\n    \"__v\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/UnitController.ts",
+    "groupTitle": "Unit"
+  },
+  {
+    "type": "post",
+    "url": "/api/units/:id/assignment",
+    "title": "Add assignment",
+    "name": "PostAssignment",
+    "group": "Unit",
+    "permission": [
+      {
+        "name": "student"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "IAssignment",
+            "optional": false,
+            "field": "assignment.",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"_id\": \"5a037e6b60f72236d8e7c858\",\n    \"updatedAt\": \"2017-11-08T22:00:11.500Z\",\n    \"createdAt\": \"2017-11-08T22:00:11.500Z\",\n    \"name\": \"What is Lorem Ipsum?\",\n    \"description\": \"...\",\n    \"markdown\": \"# What is Lorem Ipsum?\\n**Lorem Ipsum** is simply dummy text of the printing and typesetting industry.\",\n    \"_course\": \"5a037e6b60f72236d8e7c83b\",\n    \"type\": \"free-text\",\n    \"unitCreator\": \"5a037e6b60f72236d8e7c834\",\n    \"__v\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": "<p>No lecture ID was submitted.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
             "description": ""
           }
         ]
@@ -3878,6 +4108,95 @@ define({ "api": [
             "optional": false,
             "field": "ForbiddenError",
             "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/controllers/UnitController.ts",
+    "groupTitle": "Unit"
+  },
+  {
+    "type": "put",
+    "url": "/api/units/:id/assignment",
+    "title": "Update assignment",
+    "name": "PutUnit",
+    "group": "Unit",
+    "permission": [
+      {
+        "name": "teacher"
+      },
+      {
+        "name": "admin"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "file",
+            "description": "<p>Uploaded file.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Unit ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>New unit data.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Unit",
+            "optional": false,
+            "field": "unit",
+            "description": "<p>Updated unit.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"_id\": \"5a037e6b60f72236d8e7c858\",\n    \"updatedAt\": \"2018-01-29T23:43:07.220Z\",\n    \"createdAt\": \"2017-11-08T22:00:11.500Z\",\n    \"name\": \"What is Lorem Ipsum?\",\n    \"description\": \"...\",\n    \"markdown\": \"# What is Lorem Ipsum?\\n**Lorem Ipsum** is simply dummy text of the printing and typesetting industry.\",\n    \"_course\": \"5a037e6b60f72236d8e7c83b\",\n    \"type\": \"free-text\",\n    \"__v\": 0\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "BadRequestError",
+            "description": "<p>Invalid combination of file upload and unit data.</p>"
           },
           {
             "group": "Error 4xx",
@@ -4595,6 +4914,54 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "src/controllers/WhitelistController.ts",
     "groupTitle": "Whitelist"
+  },
+  {
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "unitId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "uploadedFile",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "IUser",
+            "optional": false,
+            "field": "currentUser",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NotFoundError",
+            "description": "<p>The unit was not found or there isn't an assignment from the current user in the unit.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "src/controllers/UnitController.ts",
+    "group": "_home_travis_build_geli_lms_geli_api_src_controllers_UnitController_ts",
+    "groupTitle": "_home_travis_build_geli_lms_geli_api_src_controllers_UnitController_ts",
+    "name": ""
   },
   {
     "type": "get",
